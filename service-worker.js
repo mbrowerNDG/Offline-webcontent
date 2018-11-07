@@ -3,9 +3,11 @@ const filesToCache = [
   'assets/offline-style.css',
   'assets/style.css',
   'index.html',
+  '/assets/offline.min.js',
   '/assets/js.js',
   'https://fonts.googleapis.com/css?family=Roboto',
-  'https://homes.heritageshores.com/wp-content/uploads/2017/08/Slide-1.png'
+  'https://homes.heritageshores.com/wp-content/uploads/2017/08/Slide-1.png',
+
 
 ];
 
@@ -38,7 +40,7 @@ self.addEventListener('fetch', event => {
 
     }).catch(error => {
 
-      // TODO 6 - Respond with custom offline page
+     return false;
 
     })
   );

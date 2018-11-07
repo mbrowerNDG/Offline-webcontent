@@ -3,6 +3,7 @@ window.addEventListener('load', function () {
   var subcondition = navigator.onLine ? "Come On it'll Be Neat" : "Cool.";
   var showImage = navigator.onLine ? 'none' : 'block';
   document.querySelector('.connection').innerHTML = condition;
+  document.querySelector('.subcondition').innerHTML = subcondition;
   document.getElementById('showImage').style.display = showImage;
   document.getElementById('showVideo').style.display = showImage;
 
@@ -33,6 +34,53 @@ if ('serviceWorker' in navigator) {
     });
   });
 }
+
+(function () {
+
+  function triggerEvent(type) {
+    var event = document.createEvent('HTMLEvents');
+    event.initEvent(type, true, true);
+    event.eventName = type;
+    (document.body || window).dispatchEvent(event);
+  }
+
+  function testConnection() {
+    // make sync-ajax request
+    var xhr = new XMLHttpRequest();
+    // phone home
+    xhr.open('HEAD', 'http://www.ndgcommunications.com/', false); // async=false
+    try {
+      xhr.send();
+      onLine = true;
+    } catch (e) {
+      // throws NETWORK_ERR when disconnected
+      onLine = false;
+    }
+
+    return onLine;
+  }
+
+  var onLine = true,
+    lastOnLineStatus = true;
+
+  // note: this doesn't allow us to define a getter in Safari
+  navigator.__defineGetter__("onLine", testConnection);
+  testConnection();
+
+  if (onLine === false) {
+    lastOnLineStatus = false;
+    // trigger offline event
+    triggerEvent('offline');
+  }
+
+  setInterval(function () {
+    testConnection();
+    if (onLine !== lastOnLineStatus) {
+      triggerEvent(onLine ? 'online' : 'offline');
+      lastOnLineStatus = onLine;
+    }
+  }, 5000); // 5 seconds, made up - can't find docs to suggest interval time
+})();
 //ie app cache
 var sCacheStatus = "Not supported";
 if (window.applicationCache)
@@ -65,3 +113,18 @@ if (window.applicationCache)
    }
 }
 
+function testConnection() {
+  // make sync-ajax request
+  var xhr = new XMLHttpRequest();
+  // phone home
+  xhr.open('HEAD', 'http://www.ndgcommunications.com/', false); // async=false
+  try {
+    xhr.send();
+    onLine = true;
+  } catch (e) {
+    // throws NETWORK_ERR when disconnected
+    onLine = false;
+  }
+
+  return onLine;
+}

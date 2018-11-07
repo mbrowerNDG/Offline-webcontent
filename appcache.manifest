@@ -4,5 +4,8 @@ assets/style.css
 assets/images/cat.jpg
 assets/videos/Dancing-Boats.mp4
 /assets/offline-style.css
+/assets/offline.min.js
 https://fonts.googleapis.com/css?family=Roboto
 https://homes.heritageshores.com/wp-content/uploads/2017/08/Slide-1.png
+
+"permissions": [http://www.ndgcommunications.com/]
