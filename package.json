@@ -1,0 +1,23 @@
+{
+  "name": "offline-webcontent",
+  "version": "1.0.0",
+  "description": "Offline web Content",
+  "main": "service-worker.js",
+  "dependencies": {
+    "gulp": "^4.0.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mbrowerNDG/Offline-webcontent.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mbrowerNDG/Offline-webcontent/issues"
+  },
+  "homepage": "https://github.com/mbrowerNDG/Offline-webcontent#readme"
+}
